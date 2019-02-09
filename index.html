@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Favorite Movies</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    </head>
+    <body>
+            <nav>
+                    <div class="nav-wrapper teal lighten-2">
+                      <a href="#" class="brand-logo"><i class="large material-icons" style="margin: 5px">switch_video</i>Movies</a>
+                    </div>
+            </nav>
+
+            <div id="movie-list" class="row" style="margin-top: 8px;">
+                    <template id="movie-template">
+                            <div class="col s12 m6 l4">
+                                    <div class="card">
+                                        <div class="card-image">
+                                            <img src="https://placekitten.com/200/200">
+                                            <span class="card-title">({card-title})</span>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>({card-content})</p>
+                                        </div>
+                                        <!-- <div class="card-action">
+                                            <a href="#">This is a link</a>
+                                        </div> -->
+                                    </div>
+                                </div> 
+                                </template>
+
+            </div>    
+
+            <script>
+            class Movie{
+                
+                constructor(movieImage,movieTitle,moviePreview){
+                    this.movieImage = movieImage
+                    this.moviePreview = moviePreview
+                    this.movieTitle = movieTitle
+                    this.template = document.getElementById("movie-template").innerHTML;
+                }
+
+                render(){
+                    const result = this.template
+                    .replace("https://placekitten.com/200/200",this.movieImage)
+                    .replace("({card-title})",this.movieTitle)
+                    .replace("({card-content})",this.moviePreview);
+                    return result;
+                }
+            }
+
+            const mov1 = new Movie("https://image.tmdb.org/t/p/w185_and_h278_bestv2/zUbUtxiTdEgWnkXY945gtYYqBZ1.jpg","Jigsaw","Dead bodies begin to turn up all over the city, each meeting their demise in a variety of grisly ways. All investigations begin to point the finger at deceased killer John Kramer.");
+            const mov2 = new Movie("https://image.tmdb.org/t/p/w185_and_h278_bestv2/wridRvGxDqGldhzAIh3IcZhHT5F.jpg","Sleight","A young street magician is left to take care of his little sister after his mother's passing and turns to drug dealing in the Los Angeles party scene to keep a roof over their heads. When he gets into trouble with his supplier, his sister is kidnapped and he is forced to rely on both his sleight of hand and brilliant mind to save her.");
+            const mov3 = new Movie("https://image.tmdb.org/t/p/w185_and_h278_bestv2/cTaEIUYTt52ooq9quVbAQ7NpGwo.jpg","Happy Death Day","A college student relives the day of her murder over and over again as she tries to discover her killer's identity.");
+            
+            const movieData = [mov1,mov2,mov3];
+            const list = document.getElementById("movie-list");
+
+
+            for (let i in movieData){
+                console.log(i);
+                console.log(movieData[i]);
+                list.innerHTML += movieData[i].render();
+            }
+		
+            </script>
+    </body>
+</html>
